@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jira-story-test-agent"
+version = "0.1.0"
+description = "Generate traceable manual test cases from Jira Cloud stories"
+requires-python = ">=3.11"
+dependencies = [
+  "openai>=1.68.0",
+  "pydantic>=2.7.0",
+  "requests>=2.32.0",
+  "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "pytest-cov>=5.0.0", "ruff>=0.6.0"]
+
+[project.scripts]
+jira-test-agent = "jira_test_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
